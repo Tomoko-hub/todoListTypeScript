@@ -29,8 +29,31 @@ function App() {
     setInputValue("");
   };
 
-  const handleEdit=()=>{
-    
+  const handleEdit=(id:number, inputValue:string)=>{
+    const newTodos = todos.map((todo)=>{
+      if(todo.id === id){
+        todo.inputValue = inputValue;
+      }
+      return todo;
+    });
+
+    setTodos(newTodos);
+  };
+
+  const handleChecked =(id:number, checked:boolean)=>{
+    const newTodos = todos.map((todo)=>{
+      if(todo.id === id){
+        todo.checked = !checked;
+      }
+      return todo;
+    });
+
+    setTodos(newTodos);
+  }
+
+  const handleDelete =(id:number)=>{
+    const newTodos = todos.filter((todo)=>todo.id !== id);
+    setTodos(newTodos);
   }
 
   return (
@@ -54,9 +77,18 @@ function App() {
             <li key={todo.id}>
               <input
                 type="text"
-                onChange={(event)=>handleEdit(event)}
+                onChange={(event)=>handleEdit(todo.id, event.target.value)}
                 className='inputText'
+                value={todo.inputValue}
+                disabled={todo.checked}
                />
+              <input
+                type="checkbox"
+                onChange={
+                  (event)=>handleChecked(todo.id, todo.checked)
+                }
+               />
+               <button onClick={()=>handleDelete(todo.id)}>Delete</button>
             </li>
           ))}
         </ul>

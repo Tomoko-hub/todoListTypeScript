@@ -19,4 +19,8 @@
     送信ボタン（Submit）:e.preventDefalut
 
     map : 子要素に対してkeyの設定
+
+    input disabled : boolean　クリックしたら操作が負荷になるという設定
+
+    filter : delete　条件に合ったものを残す
     
